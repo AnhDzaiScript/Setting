@@ -1,0 +1,413 @@
+<html lang="en"><head>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://tse3.mm.bing.net/th/id/OIP.-pmFs3faKPQ6beJQMlzNDAHaEY?pid=Api&amp;P=0&amp;h=220">
+    <title>Bypass YeuMoney</title>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.3s ease;
+            margin: 0;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+        .light {
+            background: linear-gradient(135deg, #1e3a8a, #06b6d4);
+        }
+        .dark {
+            background: linear-gradient(135deg, #1f2937, #374151);
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .progress-bar {
+            transition: width 1s ease-in-out;
+            background: linear-gradient(90deg, #22d3ee, #a855f7);
+            border-radius: 8px;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .custom-btn {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .custom-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+        .custom-btn:hover::after {
+            left: 100%;
+        }
+        .custom-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .theme-btn {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
+        .theme-btn:hover {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+        .dark .theme-btn {
+            background: linear-gradient(90deg, #60a5fa, #93c5fd);
+        }
+        .dark .theme-btn:hover {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+        }
+        .discord-btn {
+            background: linear-gradient(90deg, #6366f1, #a78bfa);
+        }
+        .discord-btn:hover {
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+        }
+        .start-btn {
+            background: linear-gradient(90deg, #22d3ee, #a855f7);
+        }
+        .start-btn:hover {
+            background: linear-gradient(90deg, #06b6d4, #9333ea);
+        }
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .dark .copy-btn {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .dark .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .checkbox-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .checkbox-container:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .checkbox-container .checkmark {
+            position: relative;
+            height: 28px;
+            width: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #22d3ee;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .checkbox-container input:checked ~ .checkmark {
+            background: linear-gradient(90deg, #22d3ee, #a855f7);
+            border-color: transparent;
+        }
+        /* Red checkbox for specified sites */
+        #88betag + .checkmark,
+        #w88abc + .checkmark,
+        #v9betlg + .checkmark,
+        #bk8xo + .checkmark,
+        #vn88ie + .checkmark,
+        #w88w88xlm + .checkmark,
+        #fb88dq + .checkmark {
+            border: 2px solid #ef4444;
+        }
+        #88betag:checked + .checkmark,
+        #w88abc:checked + .checkmark,
+        #v9betlg:checked + .checkmark,
+        #bk8xo:checked + .checkmark,
+        #vn88ie:checked + .checkmark,
+        #w88w88xlm:checked + .checkmark,
+        #fb88dq:checked + .checkmark {
+            background: linear-gradient(90deg, #ef4444, #dc2626);
+            border-color: transparent;
+        }
+        .checkbox-container input:checked ~ .checkmark:after {
+            content: '\2713';
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+        }
+        .checkbox-label {
+            margin-left: 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .checkbox-container:hover .checkbox-label {
+            color: #22d3ee;
+        }
+        #w88w88xlm + .checkmark + .checkbox-label {
+            font-size: 0.9rem;
+        }
+        #fun88fun88de + .checkmark + .checkbox-label {
+            font-size: 0.8rem;
+        }
+        .status-message {
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #22d3ee;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        @media (max-width: 640px) {
+            body {
+                padding-top: 70px;
+                padding-bottom: 70px;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .header {
+                padding: 0.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            .header .custom-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            .checkbox-container {
+                padding: 0.5rem;
+            }
+            .checkbox-label {
+                font-size: 1rem;
+            }
+            #w88w88xlm + .checkmark + .checkbox-label {
+                font-size: 0.8rem;
+            }
+            #fun88fun88de + .checkmark + .checkbox-label {
+                font-size: 0.7rem;
+            }
+            .start-btn {
+                font-size: 1rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1rem 1.5rem;
+            }
+            .site-checkboxes {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+        @media (min-width: 1025px) {
+            .site-checkboxes {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.mr-2{margin-right:0.5rem}.flex{display:flex}.grid{display:grid}.h-7{height:1.75rem}.w-full{width:100%}.w-7{width:1.75rem}.max-w-4xl{max-width:56rem}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-4{gap:1rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.rounded-lg{border-radius:0.5rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.text-center{text-align:center}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.text-cyan-200{--tw-text-opacity:1;color:rgb(165 243 252 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-gray-100{--tw-text-opacity:1;color:rgb(243 244 246 / var(--tw-text-opacity, 1))}.text-gray-200{--tw-text-opacity:1;color:rgb(229 231 235 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.drop-shadow-lg{--tw-drop-shadow:drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.focus\:ring-cyan-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(6 182 212 / var(--tw-ring-opacity, 1))}@media (min-width: 640px){.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style></head>
+<body class="font-sans text-gray-100 light">
+    <header class="header">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-cyan-200 drop-shadow-lg flex items-center">
+                <i class="fas fa-rocket mr-2"></i> Bypass YeuMoney
+            </h1>
+            <div class="flex space-x-2">
+                <button id="themeToggle" class="custom-btn theme-btn text-white font-semibold py-2 px-4 rounded-lg flex items-center text-sm">
+                    <i class="fas fa-moon mr-2"></i> Chế độ tối
+                </button>
+                <a href="https://discord.gg/kK2vMrUsQy" target="_blank" class="custom-btn discord-btn text-white font-semibold py-2 px-4 rounded-lg flex items-center text-sm">
+                    <i class="fab fa-discord mr-2"></i> Join Discord
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto p-6 max-w-4xl">
+        <div class="card p-8 mb-6 fade-in">
+            <h2 class="text-2xl font-extrabold text-cyan-200 mb-6">Chọn Nghiệm Vụ</h2>
+            <p class="text-gray-200 mb-6 text-lg">Danh sách nghiệm vụ:</p>
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-cyan-400 mb-4">Nghiệm vụ nút xanh</h3>
+                <div id="blueButtonCheckboxes" class="site-checkboxes grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6"><div class="checkbox-container">
+                <input type="checkbox" id="m88" value="m88" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="m88" class="checkbox-label">M88</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="fb88" value="fb88" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="fb88" class="checkbox-label">FB88</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="188bet" value="188bet" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="188bet" class="checkbox-label">188BET</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="w88" value="w88" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="w88" class="checkbox-label">W88</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="v9bet" value="v9bet" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="v9bet" class="checkbox-label">V9BET</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="vn88" value="vn88" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="vn88" class="checkbox-label">VN88</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="bk8" value="bk8" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="bk8" class="checkbox-label">BK8</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="fun88fun88de" value="fun88fun88de" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="fun88fun88de" class="checkbox-label">FUN88FUN88DE</label>
+            </div></div>
+                <h3 class="text-xl font-bold text-red-400 mb-4">Nghiệm vụ nút đỏ</h3>
+                <div id="redButtonCheckboxes" class="site-checkboxes grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-6"><div class="checkbox-container">
+                <input type="checkbox" id="88betag" value="88betag" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="88betag" class="checkbox-label">88BETAG</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="w88abc" value="w88abc" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="w88abc" class="checkbox-label">W88ABC</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="v9betlg" value="v9betlg" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="v9betlg" class="checkbox-label">V9BETLG</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="bk8xo" value="bk8xo" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="bk8xo" class="checkbox-label">BK8XO</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="vn88ie" value="vn88ie" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="vn88ie" class="checkbox-label">VN88IE</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="w88w88xlm" value="w88w88xlm" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="w88w88xlm" class="checkbox-label">W88W88XLM</label>
+            </div><div class="checkbox-container">
+                <input type="checkbox" id="fb88dq" value="fb88dq" class="h-7 w-7 text-cyan-400 focus:ring-cyan-500">
+                <span class="checkmark"></span>
+                <label for="fb88dq" class="checkbox-label">FB88DQ</label>
+            </div></div>
+            </div>
+            <button id="startBypass" class="custom-btn start-btn w-full text-white font-extrabold py-3 px-6 rounded-lg text-lg flex items-center justify-center">
+                Bắt Đầu Bypass
+                <span id="loadingSpinner" class="spinner ml-2"></span>
+            </button>
+        </div>
+        <div id="status" class="text-cyan-200 text-lg font-semibold mb-6 text-center status-message"></div>
+        <div id="results" class="space-y-6"></div>
+    </div>
+
+    <div id="toast" class="toast">Đã sao chép mã!</div>
+
+    <footer class="footer">
+        <p>© 2025 Bypass YeuMoney. All rights reserved.</p>
+    </footer>
+
+    
+
+
+</body></html>
